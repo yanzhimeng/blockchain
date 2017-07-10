@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                        http://www.springframework.org/schema/tx
+                        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 自动扫描 -->
+    <context:component-scan base-package="com.blockchain.www"/>
+
+    <!-- 第一种方式：加载一个properties文件 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:jdbc.properties"/>
+    </bean>
+
+
+    <!-- 第二种方式：加载多个properties文件
+    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:common.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="UTF-8"/>
+    </bean>
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="properties" ref="configProperties"/>
+    </bean>
+    -->
+
+    <!-- 1.DataSource数据源，使用c3p0连接池 -->
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driverClassName}"></property>
+        <property name="jdbcUrl"     value="${jdbc.url}"></property>
+        <property name="user"        value="${jdbc.username}"></property>
+        <property name="password"    value="${jdbc.password}"></property>
+        &lt;!&ndash; 指定连接数据库连接池的最小连接数 &ndash;&gt;
+        <property name="minPoolSize" value="10"></property>
+        &lt;!&ndash; 指定连接数据库连接池的最大连接数 &ndash;&gt;
+        <property name="maxPoolSize" value="20"></property>
+        &lt;!&ndash;初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 &ndash;&gt;
+        <property name="initialPoolSize" value="15"></property>
+        &lt;!&ndash; 指定连接数据库连接池的连接的最大空闲时间 &ndash;&gt;
+        <property name="maxIdleTime" value="120"></property>
+        &lt;!&ndash;当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 &ndash;&gt;
+        <property name="acquireIncrement" value="5"></property>
+        <property name="maxStatements" value="100"></property>
+        &lt;!&ndash;每60秒检查所有连接池中的空闲连接。Default: 0 &ndash;&gt;
+        <property name="idleConnectionTestPeriod" value="60"></property>
+        <property name="automaticTestTable" value="c3p0testtable"></property>
+    </bean>-->
+
+    <!-- mybatis和spring完美整合，不需要mybatis的配置映射文件 -->
+    <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        &lt;!&ndash; 自动扫描mapping.xml文件 &ndash;&gt;
+        <property name="mapperLocations" value="classpath:/com/blockchain/www/mapping/*.xml"></property>
+    </bean>-->
+
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.heitian.ssm.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>-->
+
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx
+    <tx:annotation-driven transaction-manager="transactionManager"/>-->
+</beans>
