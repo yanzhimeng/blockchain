@@ -125,12 +125,6 @@
       <version>0.9.1.2</version>
     </dependency>
 
-    <!--<dependency>
-      <groupId>com.oracle</groupId>
-      <artifactId>ojdbc14</artifactId>
-      <version>10.2.0.3.0</version>
-    </dependency>-->
-
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>

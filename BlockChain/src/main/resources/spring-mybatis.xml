@@ -17,50 +17,51 @@
         <property name="location" value="classpath:jdbc.properties"/>
     </bean>
 
-
     <!-- 第二种方式：加载多个properties文件
     <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
             <list>
                 <value>classpath:jdbc.properties</value>
-                <value>classpath:common.properties</value>
+                <value>classpath:log4j.properties</value>
             </list>
         </property>
         <property name="fileEncoding" value="UTF-8"/>
     </bean>
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
         <property name="properties" ref="configProperties"/>
-    </bean>
-    -->
+    </bean> -->
+
+    <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/>
 
     <!-- 1.DataSource数据源，使用c3p0连接池 -->
-    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="driverClass" value="${jdbc.driverClassName}"></property>
-        <property name="jdbcUrl"     value="${jdbc.url}"></property>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!--<property name="driverClass" value="${jdbc.driverClass}"></property>
+        <property name="jdbcUrl"     value="${jdbc.jdbcUrl}"></property>
         <property name="user"        value="${jdbc.username}"></property>
-        <property name="password"    value="${jdbc.password}"></property>
-        &lt;!&ndash; 指定连接数据库连接池的最小连接数 &ndash;&gt;
+        <property name="password"    value="${jdbc.password}"></property>-->
+
+        <!-- 指定连接数据库连接池的最小连接数 -->
         <property name="minPoolSize" value="10"></property>
-        &lt;!&ndash; 指定连接数据库连接池的最大连接数 &ndash;&gt;
+        <!-- 指定连接数据库连接池的最大连接数 -->
         <property name="maxPoolSize" value="20"></property>
-        &lt;!&ndash;初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 &ndash;&gt;
+        <!-- 初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->
         <property name="initialPoolSize" value="15"></property>
-        &lt;!&ndash; 指定连接数据库连接池的连接的最大空闲时间 &ndash;&gt;
+        <!-- 指定连接数据库连接池的连接的最大空闲时间 -->
         <property name="maxIdleTime" value="120"></property>
-        &lt;!&ndash;当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 &ndash;&gt;
+        <!-- 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
         <property name="acquireIncrement" value="5"></property>
         <property name="maxStatements" value="100"></property>
-        &lt;!&ndash;每60秒检查所有连接池中的空闲连接。Default: 0 &ndash;&gt;
+        <!-- 每60秒检查所有连接池中的空闲连接。Default: 0 -->
         <property name="idleConnectionTestPeriod" value="60"></property>
         <property name="automaticTestTable" value="c3p0testtable"></property>
-    </bean>-->
+    </bean>
 
     <!-- mybatis和spring完美整合，不需要mybatis的配置映射文件 -->
-    <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        &lt;!&ndash; 自动扫描mapping.xml文件 &ndash;&gt;
-        <property name="mapperLocations" value="classpath:/com/blockchain/www/mapping/*.xml"></property>
-    </bean>-->
+        <!-- 自动扫描mapping.xml文件 -->
+        <!--<property name="mapperLocations" value="classpath:/com/blockchain/www/mapping/*.xml"></property>-->
+    </bean>
 
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -68,11 +69,12 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
 
-    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
-    </bean>-->
+    </bean>
 
-    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx
-    <tx:annotation-driven transaction-manager="transactionManager"/>-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
 </beans>
