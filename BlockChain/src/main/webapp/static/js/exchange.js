@@ -8,7 +8,7 @@ function show() {
     //得到选择器2对象
     var s2 = document.getElementById('s2');
     //在选择器2输出默认<option>选项
-    s2.innerHTML = '<option value="">--请选择--</option>';
+    //s2.innerHTML = '<option value="">--请选择--</option>';
 
     var s1vlu = $('#s1 option:selected').val();
     //alert(s1vlu);
@@ -26,6 +26,9 @@ function show() {
         var option = document.createElement('option');
         option.value = arrs[i];
         option.innerHTML = arrs[i];
+        if(i==0){
+            option.selected = true;
+        }
         s2.appendChild(option);
     }
 

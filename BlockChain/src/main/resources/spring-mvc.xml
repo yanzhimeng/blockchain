@@ -31,7 +31,6 @@
         </property>
     </bean>
 
-
     <!-- 定义跳转的文件的前后缀 ，视图模式配置
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/web/" />
@@ -39,9 +38,6 @@
     </bean>-->
 
     <!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->
-    <!--<bean id="viewResolver"-->
-    <!--class="org.springframework.web.servlet.view.InternalResourceViewResolver"-->
-    <!--p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" p:order="2" />-->
     <!--静态资源扫描-->
     <mvc:resources mapping="/javascript/**"  location="/static/js/"/>
     <mvc:resources mapping="/styles/**"  location="/static/css/"/>
