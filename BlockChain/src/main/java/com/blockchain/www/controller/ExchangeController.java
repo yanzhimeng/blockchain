@@ -14,6 +14,7 @@ public class ExchangeController {
 
     @RequestMapping("/toBitCoin")
     public String toBitCoin(Model model)throws Exception{
+        model.addAttribute("name","yanzhimeng");
         return "exchange";
     }
 

@@ -32,10 +32,63 @@
     </bean>
 
 
-    <!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
+    <!-- 定义跳转的文件的前后缀 ，视图模式配置
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/webpage/" />
+        <property name="prefix" value="/WEB-INF/web/" />
         <property name="suffix" value=".jsp"/>
+    </bean>-->
+
+    <!-- Thymeleaf 模板解决器设置 -->
+    <bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="prefix" value="/WEB-INF/web/" />
+        <property name="suffix" value=".html"/>
+        <property name="templateMode" value="HTML5" />
+        <property name="characterEncoding" value="UTF-8"/>
+        <property name="cacheable" value="false"/>
+    </bean>
+
+    <!-- Thymeleaf 模板引擎设置 -->
+    <bean id="templateEngine"
+          class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver" />
+        <!-- 附加方言 -->
+        <property name="additionalDialects">
+            <set>
+                <bean class="org.thymeleaf.spring4.dialect.SpringStandardDialect"/>
+                <bean class="nz.net.ultraq.thymeleaf.LayoutDialect"/>
+                <bean class="org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect"/>
+                <!-- <bean class="at.pollux.thymeleaf.shiro.dialect.ShiroDialect"/> -->
+            </set>
+        </property>
+    </bean>
+
+    <!-- REST 内容协商 -->
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="mediaTypes" >
+            <value>
+                json=application/json
+                <!--yson=application/json-->
+                htm=text/html
+                <!--xml=application/xml-->
+                html=text/html
+            </value>
+        </property>
+        <property name="defaultContentType" value="text/html"/>
+        <property name="ignoreAcceptHeader" value="true"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="1"/>
+        <property name="contentNegotiationManager" ref="contentNegotiationManager"/>
+        <property name="viewResolvers">
+            <list>
+                <!-- Thymeleaf 与 Spring 整合 -->
+                <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+                    <property name="templateEngine" ref="templateEngine" />
+                    <property name="characterEncoding" value="UTF-8"/>
+                </bean>
+            </list>
+        </property>
     </bean>
 
     <!-- 文件上传配置 -->
