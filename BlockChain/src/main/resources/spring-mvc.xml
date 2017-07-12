@@ -38,6 +38,16 @@
         <property name="suffix" value=".jsp"/>
     </bean>-->
 
+    <!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->
+    <!--<bean id="viewResolver"-->
+    <!--class="org.springframework.web.servlet.view.InternalResourceViewResolver"-->
+    <!--p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" p:order="2" />-->
+    <!--静态资源扫描-->
+    <mvc:resources mapping="/javascript/**"  location="/static/js/"/>
+    <mvc:resources mapping="/styles/**"  location="/static/css/"/>
+    <mvc:resources mapping="/images/**"  location="/static/img/"/>
+    <mvc:default-servlet-handler />
+
     <!-- Thymeleaf 模板解决器设置 -->
     <bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
         <property name="prefix" value="/WEB-INF/web/" />
