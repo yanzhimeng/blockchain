@@ -18,6 +18,8 @@ public class ExchangeController {
     @Resource
     private ExchangeService exchangeService;
 
+
+
     @RequestMapping("/toBitCoin")
     public String toBitCoin(Model model)throws Exception{
         model.addAttribute("name","yanzhimeng");
@@ -26,6 +28,7 @@ public class ExchangeController {
 
     @RequestMapping("/detail")
     public String toBitCoin(Model model,String s1,String s2)throws Exception{
+        s1 = exchangeService.testMethod(s1);
         model.addAttribute("s1",s1);
         model.addAttribute("s2",s2);
         return "detail";
