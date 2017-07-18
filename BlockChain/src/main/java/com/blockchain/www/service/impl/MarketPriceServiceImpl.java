@@ -1,6 +1,6 @@
 package com.blockchain.www.service.impl;
 
-import com.blockchain.www.service.ExchangeService;
+import com.blockchain.www.service.MarketPriceService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,8 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor =Exception.class)
-public class ExchangeServiceImpl implements ExchangeService {
-
+public class MarketPriceServiceImpl implements MarketPriceService {
 
     public String testMethod(String s1) {
 

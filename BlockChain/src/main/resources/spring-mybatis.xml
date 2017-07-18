@@ -33,34 +33,32 @@
 
     <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/>
 
-    <!-- 1.DataSource数据源，使用c3p0连接池 -->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <!--<property name="driverClass" value="${jdbc.driverClass}"></property>
-        <property name="jdbcUrl"     value="${jdbc.jdbcUrl}"></property>
-        <property name="user"        value="${jdbc.username}"></property>
-        <property name="password"    value="${jdbc.password}"></property>-->
-
-        <!-- 指定连接数据库连接池的最小连接数 -->
-        <property name="minPoolSize" value="10"></property>
-        <!-- 指定连接数据库连接池的最大连接数 -->
-        <property name="maxPoolSize" value="20"></property>
-        <!-- 初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->
-        <property name="initialPoolSize" value="15"></property>
-        <!-- 指定连接数据库连接池的连接的最大空闲时间 -->
-        <property name="maxIdleTime" value="120"></property>
-        <!-- 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
-        <property name="acquireIncrement" value="5"></property>
-        <property name="maxStatements" value="100"></property>
-        <!-- 每60秒检查所有连接池中的空闲连接。Default: 0 -->
-        <property name="idleConnectionTestPeriod" value="60"></property>
-        <property name="automaticTestTable" value="c3p0testtable"></property>
+    <!--数据源-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <!--连接池启动时的初始化 -->
+        <property name="initialSize" value="1" />
+        <!--连接池的最大值 -->
+        <property name="maxActive" value="30" />
+        <!-- 最大空闲值，当经过一个高峰时间后，连接池可以慢慢将已经用不到的链接慢慢释放一部分，一直减少到maxle为止 -->
+        <property name="maxIdle" value="2" />
+        <!-- 最小空闲值，当空闲的连接数少于阀值时，连接池就会预申请去一些链接，以免洪峰来时来不及申请 -->
+        <property name="minIdle" value="1" />
+        <!-- 运行判断连接超时任务的时间间隔，单位为毫秒，默认为-1，即不执行任务。 -->
+        <property name="timeBetweenEvictionRunsMillis" value="3600000" />
+        <!-- 连接的超时时间，默认为半小时。 -->
+        <property name="minEvictableIdleTimeMillis" value="3600000" />
     </bean>
 
     <!-- mybatis和spring完美整合，不需要mybatis的配置映射文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <!-- 自动扫描mapping.xml文件 -->
-        <!--<property name="mapperLocations" value="classpath:/com/blockchain/www/mapping/*.xml"></property>-->
+        <property name="mapperLocations" value="classpath*:/com/blockchain/www/mapping/*.xml"></property>
     </bean>
 
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
