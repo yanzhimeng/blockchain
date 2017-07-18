@@ -1,4 +1,4 @@
-package com.blockchain.www.utils.constant;
+package com.blockchain.www.utils;
 
 /**
  * Created by zhijiansha on 2017-7-6.

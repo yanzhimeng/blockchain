@@ -1,5 +1,4 @@
-package com.blockchain.www.utils;
-import com.blockchain.www.utils.ExchangeData;
+package com.blockchain.www.others;
 import com.blockchain.www.dao.btctrade.BtcTradePriceDto;
 import net.sf.json.JSONObject;
 

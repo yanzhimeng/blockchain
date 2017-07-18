@@ -1,4 +1,4 @@
-package com.blockchain.www.utils;
+package com.blockchain.www.others;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
