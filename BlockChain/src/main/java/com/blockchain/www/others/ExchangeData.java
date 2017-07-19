@@ -34,6 +34,4 @@ public class ExchangeData {
         return sb.toString();
     }
 
-
-
 }

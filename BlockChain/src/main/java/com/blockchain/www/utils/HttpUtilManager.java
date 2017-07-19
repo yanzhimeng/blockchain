@@ -1,19 +1,7 @@
 package com.blockchain.www.utils;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.io.IOUtils;
-import org.apache.http.Consts;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpException;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
+import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -22,11 +10,18 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.conn.ConnectionKeepAliveStrategy;
 import org.apache.http.impl.client.DefaultConnectionKeepAliveStrategy;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HttpContext;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 
 
@@ -90,7 +85,10 @@ public class HttpUtilManager {
 	private  HttpRequestBase httpGetMethod(String url) {
 		return new  HttpGet(url);
 	}
-	
+
+	/**
+	 * API get请求返回json字符串
+	 */
 	public String requestHttpGet(String url_prex,String url,String param) throws HttpException, IOException{
 		
 		IdleConnectionMonitor();
@@ -121,7 +119,10 @@ public class HttpUtilManager {
 		}
 		return responseData;
 	}
-	
+
+	/**
+	 * API post请求返回json字符串
+	 */
 	public String requestHttpPost(String url_prex,String url,Map<String,String> params) throws HttpException, IOException{
 		
 		IdleConnectionMonitor();

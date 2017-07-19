@@ -1,5 +1,6 @@
 package com.blockchain.www.others;
 import com.blockchain.www.dao.btctrade.BtcTradePriceDto;
+import com.blockchain.www.utils.HttpUtilManager;
 import net.sf.json.JSONObject;
 
 /**
@@ -9,6 +10,11 @@ import net.sf.json.JSONObject;
 public class Exchange {
 
     public static void main(String args[])throws Exception{
+
+        HttpUtilManager httpUtil = HttpUtilManager.getInstance();
+        String result = httpUtil.requestHttpGet("https://api.btctrade.com/api/ticker", "", "coin=btc");
+        System.out.println(result);
+
         String data = ExchangeData.getData();
         JSONObject jsonObject = JSONObject.fromObject(data);
         BtcTradePriceDto dto = (BtcTradePriceDto) JSONObject.toBean(jsonObject, BtcTradePriceDto.class);
