@@ -1,0 +1,49 @@
+
+git@github.com:yanzhimeng/blockchain.git
+
+1、每个交易所的API用java封装（云币网，还有火币、OKCoin、BTER、BTCTrade等交易所）
+2、各个交易所的API摸清一下，整理个简单文档；参考下苏总发的那个git项目看是怎么实现的，里面都是javascript代码，容易懂的，之后可以做设计，用java封装下
+3、先只做价格信息，后续还要看是否能通过API下单，我看过几个网站是支持API下单的，只是不知道是否可用
+
+1.交易 最高值 最低值 均值
+提供各种可能的比特币汇率信息（周四前完）
+2.项目加上日志
+
+目前已经实现chbtc,huobi,okcoin,okcoin 期货，poloniex,haobtc 几家主流交易所API接口的统一封装，
+
+参考：
+连接各个交易所的API，查询虚拟币的交易行情
+https://github.com/Aaaaaashu/Whale
+
+目前国内主流的比特币平台有：BTCTrade比特币交易网、OKCoin币行、火币网HuoBi、比特币中国BTCC、中国比特币CHBTC、聚币网JuBi、比特时代BTC38、元宝网yuanbao等等。
+
+各交易网的API：
+BTCTrade：https://www.btctrade.com/api.help.html
+火币交易：https://github.com/huobiapi/API_Docs/wiki
+云币网：https://yunbi.com/documents/api/guide
+OKCoin：https://www.okcoin.com/about/rest_sample.html
+BTER：https://cn.bter.com/api
+poloniex：https://poloniex.com/support/api/
+haobtc：https://github.com/haobtc/API_Docs/wiki
+chbtc：https://www.chbtc.com/i/developer/restApi#market
+			https://www.chbtc.com/help/api
+聚币网：https://www.jubi.com/help/api.html
+
+
+阶段1.btc 支付
+（提示当前btc价格 60分钟市场均价（10分钟））
+
+阶段2.交易所
+查找最低价格_提供下单(类似支付宝)portal  shapeshift（虚拟币兑换）
+
+（实时监控）
+
+
+
+
+
+
+
+
+
+
