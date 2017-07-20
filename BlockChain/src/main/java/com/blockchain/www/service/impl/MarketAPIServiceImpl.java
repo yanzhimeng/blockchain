@@ -2,12 +2,15 @@ package com.blockchain.www.service.impl;
 
 import com.blockchain.www.service.MarketAPIService;
 import org.apache.http.HttpException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 
 /**
  * Created by zhijiansha on 2017-7-6.
  */
+@Service("marketAPIService")
 public class MarketAPIServiceImpl implements MarketAPIService {
 
 

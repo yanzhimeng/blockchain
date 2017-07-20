@@ -12,6 +12,7 @@
 
     <!-- 自动扫描  @Controller-->
     <context:component-scan base-package="com.blockchain.www.controller"/>
+    <context:component-scan base-package="com.blockchain.www.service.impl"/>
 
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
     <bean id="mappingJacksonHttpMessageConverter"
